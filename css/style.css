@@ -49,6 +49,9 @@ li img{
     object-fit: cover;
 }
 
-.contenedor-productos-carrito {
-    justify-content: space-between;
-}
+/* botones eliminar */
+.eliminar {
+border: none;
+background-color: transparent;
+color: red;
+};
