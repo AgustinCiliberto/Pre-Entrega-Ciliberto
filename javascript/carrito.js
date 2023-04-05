@@ -30,9 +30,7 @@ btnEliminar.forEach((boton)=>{
     boton.addEventListener("click", () => {
         const id = parseInt(boton.id);
         const indice = productosEnCarrito.findIndex(producto => producto.id === id);
-        console.log(productosEnCarrito);
         productosEnCarrito.splice(indice, 1);
-        console.log(productosEnCarrito);
         let carritoJSON = JSON.stringify(productosEnCarrito);
         localStorage.setItem("carrito", carritoJSON);
         location.reload();
@@ -41,6 +39,7 @@ btnEliminar.forEach((boton)=>{
 });
 };
 
+//Boton de Vaciar carrito. Se crea una funcion la cual va a reasignar el arrar de los productos en carrito a 0, luego se guarda en localstorage
 const btnVaciarCarrito = document.querySelector("#vaciar-carrito");
 btnVaciarCarrito.addEventListener("click", vaciarCarrito)
 function vaciarCarrito (){
@@ -51,7 +50,7 @@ function vaciarCarrito (){
 };
 
 
-
+//Funcion que calcula el total. Se realiza un map de los productos en el carrito creando un nuevo array asignado a la variable precios. Luego se hace un reduce para sumar todo lo que contenga el array y se lo asigna a la variable total, que sera el valor que devuelve la funcion
 function calcularTotal (productos) {
     let precios = productos.map((producto) => producto.precio);
     let total = precios.reduce((acc, item) => {
@@ -62,7 +61,7 @@ function calcularTotal (productos) {
 
 // console.log(calcularTotal(productosEnCarrito));
 
-
+//Texto que ira mostrando el total acumulado de los productos seleccionados. Se crea un texto y su contenido sera el valor de la funcion calcularTotal
 const textoTotal = document.querySelector("#total-compra");
 
 function compra (){
@@ -72,7 +71,7 @@ function compra (){
 };
 
 compra();
-
+//Boton de finalizar compra, se crea una funcion que mostrara un alert, el mismo muestra el precio total de la compra hasta el momento y consulta si se desea finalizar la compra. En caso de aceptar salda otra alerta informando el total y procedera a vaciarse el carrito luego de dos segundos.
 const btnFinalizarCompra = document.querySelector("#finalizar-compra")
 
 btnFinalizarCompra.addEventListener("click", finalizarCompra);
