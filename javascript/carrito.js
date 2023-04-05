@@ -9,7 +9,7 @@ function cargarProductosCarrito() {
             const div = document.createElement("div")
             div.innerHTML = `
                                 <div class="d-flex align-items-center justify-content-between mb-4" >
-                                    <img src="../images/cama.jpg" alt="cama" class="img-carrito">
+                                    <img src="${producto.imagen}" alt="cama" class="img-carrito">
                                     <p>${producto.nombre}</p>
                                     <p>$${producto.precio}</p>
                                     <button class="fa-solid fa-trash eliminar" id=${producto.id}></button>
@@ -41,5 +41,53 @@ btnEliminar.forEach((boton)=>{
 });
 };
 
+const btnVaciarCarrito = document.querySelector("#vaciar-carrito");
+btnVaciarCarrito.addEventListener("click", vaciarCarrito)
+function vaciarCarrito (){
+    productosEnCarrito.length = 0;
+    localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
+    cargarProductosCarrito();
+    location.reload();
+};
 
 
+
+function calcularTotal (productos) {
+    let precios = productos.map((producto) => producto.precio);
+    let total = precios.reduce((acc, item) => {
+        return acc + item;
+    });
+    return total;
+};
+
+// console.log(calcularTotal(productosEnCarrito));
+
+
+const textoTotal = document.querySelector("#total-compra");
+
+function compra (){
+    const p = document.createElement("p")
+    p.innerHTML = `Total de la compra = $${calcularTotal(productosEnCarrito)}`
+    textoTotal.append(p);
+};
+
+compra();
+
+const btnFinalizarCompra = document.querySelector("#finalizar-compra")
+
+btnFinalizarCompra.addEventListener("click", finalizarCompra);
+function finalizarCompra () {
+    Swal.fire({
+        title: `Quieres finalizar la compra por $${calcularTotal(productosEnCarrito)}?`,
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Finalizar',
+        denyButtonText: `Seguir Comprando`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('Compra finalizada', `Precio: $${calcularTotal(productosEnCarrito)}`, 'success');
+        setTimeout(vaciarCarrito, 2000);
+        } 
+      })
+}

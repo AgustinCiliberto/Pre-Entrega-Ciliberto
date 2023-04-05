@@ -1,0 +1,39 @@
+[
+    {
+        "id": 1,
+        "nombre": "Cucha",
+        "imagen": "../images/cuchauno.jpg",
+        "precio": 5000,
+        "filtro": {
+            "categoria": "cuchas"
+        }
+    },
+    {
+        "id": 2,
+        "nombre": "Cama",
+        "imagen": "../images/cama.jpg",
+        "precio": 1000,
+        "filtro": {
+            "categoria": "camas"
+        }
+    },
+    {
+        "id": 3,
+        "nombre": "Alimentos",
+        "imagen": "../images/alimento.jpg",
+        "precio": 1500,
+        "filtro": {
+            "categoria": "alimentos"
+        }
+    },
+    {
+        "id": 4,
+        "nombre": "Correas",
+        "imagen": "../images/correa.jpg",
+        "precio": 2000,
+        "filtro": {
+            "categoria": "correas"
+        }
+    }
+
+]

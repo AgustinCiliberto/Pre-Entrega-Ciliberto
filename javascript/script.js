@@ -1,38 +1,10 @@
-const productos = [
-    {
-        id: 1,
-        nombre: "Cucha",
-        precio: 5000,
-        filtro: {
-            categoria: "cuchas",
-        }
-    },
-    {
-        id: 2,
-        nombre: "Cama",
-        precio: 1000,
-        filtro: {
-            categoria: "camas"
-        }
-    },
-    {
-        id: 3,
-        nombre: "Alimentos",
-        precio: 1500,
-        filtro: {
-            categoria: "alimentos"
-        }
-    },
-    {
-        id: 4,
-        nombre: "Correas",
-        precio: 2000,
-        filtro: {
-            categoria: "correas"
-        }
-    },
-
-];
+let productos = [];
+fetch("./javascript/productos.json")
+    .then(response => response.json())
+    .then(data => {
+        productos = data;
+        cargarProductos(productos);
+    });
 
 
 
@@ -55,10 +27,10 @@ function cargarProductos(productosElegidos) {
         li.classList.add("col-md-4");
         li.classList.add("text-center")
         li.classList.add("mb-4")
-        li.innerHTML = `<img src="./images/cama.jpg" alt="">
+        li.innerHTML = `<img src="${producto.imagen}" alt="">
         <p class="">${producto.nombre}</p>
         <p class="">$${producto.precio}</p>
-        <button type="button" class="comprar" id="${producto.id}">Agregar al Carrito</button>
+        <button type="button" class="comprar btn btn-warning" id="${producto.id}">Agregar al Carrito</button>
         `
         misProductos.append(li);
         
@@ -81,7 +53,7 @@ function cargarProductos(productosElegidos) {
     });
 };
 // llamado a la funcion por parametro
-cargarProductos(productos);
+
 
 
 
